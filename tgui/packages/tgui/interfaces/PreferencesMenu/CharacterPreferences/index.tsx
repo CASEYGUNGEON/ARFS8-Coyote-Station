@@ -162,7 +162,6 @@ export function CharacterPreferenceWindow(props) {
               tooltip="Export Character Image" //Delete this comment about being experimental before merge
               tooltipPosition="top"
             />
-            {/* BUBBER EDIT ADDITION END */}
           </Stack.Item>
           {!data.content_unlocked && (
             <Stack.Item grow align="center" mb={-1}>
