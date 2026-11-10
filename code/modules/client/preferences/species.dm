@@ -36,6 +36,7 @@
 
 	//SKYRAT EDIT ADDITION
 	target.dna.update_body_size()
+	target.dna.update_body_width()
 
 	for(var/organ_key in list(ORGAN_SLOT_VAGINA, ORGAN_SLOT_PENIS, ORGAN_SLOT_BREASTS, ORGAN_SLOT_ANUS))
 		var/obj/item/organ/genital/gent = target.get_organ_slot(organ_key)

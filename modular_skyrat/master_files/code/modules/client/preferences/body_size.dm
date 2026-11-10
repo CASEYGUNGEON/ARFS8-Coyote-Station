@@ -15,3 +15,21 @@
 
 /datum/preference/numeric/body_size/create_default_value()
 	return BODY_SIZE_NORMAL
+
+/datum/preference/numeric/body_width
+	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	savefile_identifier = PREFERENCE_CHARACTER
+	savefile_key = "body_width"
+	minimum = BODY_SIZE_MIN
+	maximum = BODY_SIZE_MAX
+	step = 0.01
+
+/datum/preference/numeric/body_width/is_accessible(datum/prefs_holder/preferences)
+	var/passed_initial_check = ..(preferences)
+	return passed_initial_check
+
+/datum/preference/numeric/body_width/apply_to_human(mob/living/carbon/human/target, value)
+	target.dna.features["body_width"] = value
+
+/datum/preference/numeric/body_width/create_default_value()
+	return BODY_SIZE_NORMAL

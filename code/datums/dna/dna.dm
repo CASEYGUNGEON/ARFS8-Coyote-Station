@@ -97,6 +97,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	new_dna.mutant_bodyparts = mutant_bodyparts.Copy()
 	new_dna.body_markings = body_markings.Copy()
 	new_dna.update_body_size()
+	new_dna.update_body_width()
 	// BUBBER EDIT ADDITION END
 	//if the new DNA has a holder, transform them immediately, otherwise save it
 	if(new_dna.holder)
@@ -445,6 +446,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	dna.unique_features = dna.generate_unique_features()
 
 	dna.update_body_size()
+	dna.update_body_width()
 	// BUBBER EDIT ADDITION END
 	dna.species.on_species_gain(src, old_species, pref_load, icon_update, replace_missing)
 	log_mob_tag("TAG: [tag] SPECIES: [key_name(src)] \[[mrace]\]")

@@ -19,10 +19,13 @@
 	ADD_TRAIT(owner, TRAIT_BEAST_FORM, SPECIES_TRAIT)
 	if(owner.has_quirk(/datum/quirk/big_transformation) || owner.has_quirk(/datum/quirk/oversized) || owner.dna.features["body_size"] >= 1.35) // SPLURT EDIT ADD - CHANGE BASE SIZE TO 1.35, MAKE SIZE 2 CONDITIONAL
 		owner.dna.features["body_size"] = 2
+		owner.dna.features["body_width"] = 2
 	else
 		owner.dna.features["body_size"] = 1.35
+		owner.dna.features["body_width"] = 1.35
 	owner.maptext_height = 32 * owner.dna.features["body_size"] //Adjust runechat height
 	owner.dna.update_body_size()
+	owner.dna.update_body_width()
 	owner.mob_size = MOB_SIZE_LARGE
 	playsound(owner, 'modular_zubbers/code/modules/customization/species/lycans/transform.ogg', 50)
 
@@ -35,8 +38,10 @@
 	REMOVE_TRAIT(owner, TRAIT_BEAST_FORM, SPECIES_TRAIT)
 	if(!owner.has_quirk(/datum/quirk/oversized))
 		owner.dna.features["body_size"] = owner?.client?.prefs ?owner?.client?.prefs?.read_preference(/datum/preference/numeric/body_size) : 1
+		owner.dna.features["body_width"] = owner?.client?.prefs ?owner?.client?.prefs?.read_preference(/datum/preference/numeric/body_width) : 1
 		owner.maptext_height = 32 * owner.dna.features["body_size"]
 		owner.dna.update_body_size()
+		owner.dna.update_body_width()
 		owner.mob_size = MOB_SIZE_HUMAN
 	playsound(owner, 'modular_zubbers/code/modules/customization/species/lycans/transform.ogg', 50)
 	if(removed_quirks)

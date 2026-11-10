@@ -100,6 +100,7 @@
 	"penis_sheath" = SHEATH_NONE,\
 	"balls_size" = 1,\
 	"body_size" = BODY_SIZE_NORMAL,\
+	"body_width" = BODY_SIZE_NORMAL,\
 	"custom_species" = "",\
 	"penis_uses_skintones" = TRUE,\
 	"penis_uses_skincolor" = TRUE,\

@@ -5,6 +5,7 @@
 	var/list/list/body_markings = list()
 	///Current body size, used for proper re-sizing and keeping track of that
 	var/current_body_size = BODY_SIZE_NORMAL
+	var/current_body_width = BODY_SIZE_NORMAL
 
 /datum/dna/proc/update_body_size()
 	if(!holder || species.body_size_restricted || current_body_size == features["body_size"])
@@ -12,13 +13,27 @@
 	var/change_multiplier = features["body_size"] / current_body_size
 	//We update the translation to make sure our character doesn't go out of the southern bounds of the tile
 	var/translate = ((change_multiplier-1) * 32)/2
-	holder.transform = holder.transform.Scale(change_multiplier)
+	holder.transform = holder.transform.Scale(1, change_multiplier)
 	// Splits the updated translation into X and Y based on the user's rotation.
 	var/translate_x = translate * ( holder.transform.b / features["body_size"] )
 	var/translate_y = translate * ( holder.transform.e / features["body_size"] )
-	holder.transform = holder.transform.Translate(translate_x, translate_y)
+	holder.transform = holder.transform.Translate(0, translate_y)
 	holder.maptext_height = 32 * features["body_size"] // Adjust runechat height
 	current_body_size = features["body_size"]
+
+/datum/dna/proc/update_body_width()
+	if(!holder || species.body_width_restricted || current_body_width == features["body_width"])
+		return
+	var/change_multiplier = features["body_width"] / current_body_width
+	//We update the translation to make sure our character doesn't go out of the southern bounds of the tile
+	var/translate = ((change_multiplier-1) * 32)/2
+	holder.transform = holder.transform.Scale(change_multiplier, 1)
+	// Splits the updated translation into X and Y based on the user's rotation.
+	var/translate_x = translate * ( holder.transform.b / features["body_width"] )
+	var/translate_y = translate * ( holder.transform.e / features["body_width"] )
+	holder.transform = holder.transform.Translate(translate_x, 0)
+	holder.maptext_height = 32 * features["body_width"] // Adjust runechat height
+	current_body_width = features["body_width"]
 
 /mob/living/carbon/proc/apply_customizable_dna_features_to_species()
 	if(!has_dna())

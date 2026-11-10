@@ -76,6 +76,7 @@
 	var/original_size = 1
 	/// What size are we changing the parent mob to?
 	var/target_size = 1
+	var/original_width
 
 /datum/component/temporary_size/Initialize(size_to_apply)
 	. = ..()
@@ -84,6 +85,7 @@
 
 	var/mob/living/carbon/human/human_parent = parent
 	original_size = human_parent?.dna.features["body_size"]
+	original_width = human_parent?.dna.features["body_width"]
 
 	if(!original_size) //If we aren't able to get the original size, we shouldn't exist.
 		return COMPONENT_INCOMPATIBLE
@@ -113,8 +115,10 @@
 		human_parent.dna.species.body_size_restricted = FALSE
 
 	human_parent.dna.features["body_size"] = size_to_apply
+	human_parent.dna.features["body_width"] = (original_width / original_size) * size_to_apply
 	human_parent.maptext_height = 32 * human_parent.dna.features["body_size"]
 	human_parent.dna.update_body_size()
+	human_parent.dna.update_body_width()
 	return TRUE
 
 /datum/component/temporary_size/Destroy(force, silent)
